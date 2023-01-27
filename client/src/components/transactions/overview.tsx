@@ -17,7 +17,7 @@ export const TransactionOverview = ({ receiver, message, amount, timestamp }: IP
         </div>
       </div>
       <div className=" inline-flex flex-col items-end">
-        <div className="font-bold">{amount}</div>
+        <div className="font-medium">{amount}</div>
         <div className=" font-thin text-xs text-gray-500">{timestamp}</div>
       </div>
     </div>

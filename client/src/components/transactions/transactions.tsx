@@ -1,6 +1,9 @@
+import { useEthers } from "@usedapp/core";
 import { TransactionOverview } from "./overview";
 
 export const Transactions = () => {
+  const { account } = useEthers();
+  if (!account) return null;
   return (
     <div className="w-full space-y-4">
       {/** Header */}
