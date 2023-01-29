@@ -1,13 +1,13 @@
-import { Loader } from '@/components/loader'
-import { Header } from '@/components/header/header'
-import { Balance } from '@/components/balance/balance'
-import { Transactions } from '@/components/transactions/transactions'
-import { dappConfig } from '@/utils/dapp'
-import { useEthers } from '@usedapp/core'
+import { Loader } from "@/components/loader";
+import { Header } from "@/components/header/header";
+import { Balance } from "@/components/balance/balance";
+import { Transactions } from "@/components/transactions/transactions";
+import { useConnect } from "@/hooks/useConnect";
 
 export default function Home() {
-  const { chainId, isLoading } = useEthers();
-  const unacceptedChain = !dappConfig?.readOnlyUrls?.[chainId!];
+  const { contractAddress, isWeb3Enabled, isWeb3EnableLoading: isLoading } = useConnect();
+
+  const unacceptedChain = isWeb3Enabled && !contractAddress;
   return (
     <>
       {isLoading && <Loader />}

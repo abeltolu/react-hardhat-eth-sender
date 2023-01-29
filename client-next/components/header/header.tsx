@@ -1,16 +1,10 @@
-import { useEthers, shortenIfAddress } from "@usedapp/core";
+import { useConnect } from "@/hooks/useConnect";
+import { shortenAddress } from "@/utils/dapp";
 import Blockies from "react-blockies";
 import Logo from "../../assets/metamask.svg";
 
 export const Header = () => {
-  const { activateBrowserWallet, deactivate, account } = useEthers();
-  const handleConnect = () => {
-    activateBrowserWallet();
-  };
-  const handleDisconnect = () => {
-    deactivate();
-    window.location.reload();
-  };
+  const { account, handleConnect, handleDisconnect } = useConnect();
   return (
     <header className="flex justify-between items-center">
       <div className="">
@@ -25,7 +19,7 @@ export const Header = () => {
         >
           {account ? (
             <>
-              <Blockies seed={account} size={8} scale={2} className="rounded-full mr-1" /> {shortenIfAddress(account)}
+              <Blockies seed={account} size={8} scale={2} className="rounded-full mr-1" /> {shortenAddress(account)}
             </>
           ) : (
             <>

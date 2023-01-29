@@ -1,8 +1,8 @@
-import { useEthers } from "@usedapp/core";
+import { useConnect } from "@/hooks/useConnect";
 import { TransactionOverview } from "./overview";
 
 export const Transactions = () => {
-  const { account } = useEthers();
+  const { account } = useConnect();
   if (!account) return null;
   return (
     <div className="w-full space-y-4">

@@ -1,14 +1,14 @@
-import { Config, Goerli, Localhost } from "@usedapp/core";
-import { getDefaultProvider } from "ethers";
+import { utils } from "ethers";
 
-const HardhatNodeChainId = 31337;
-export const dappConfig: Config = {
-  readOnlyChainId: Localhost.chainId,
-  readOnlyUrls: {
-    [Goerli.chainId]: getDefaultProvider("goerli", {
-      alchemy: "RNd2mT9NJVIEK2yHxJRwbdar8KuqTna9",
-    }),
-    [Localhost.chainId]: "http://127.0.0.1:7545",
-    [HardhatNodeChainId]: "http://127.0.0.1:8545", //hardhat node
-  },
-};
+export function shortenAddress(address: string): string {
+  try {
+    const formattedAddress = utils.getAddress(address);
+    return shortenString(formattedAddress);
+  } catch {
+    throw new TypeError("Address can't be parsed");
+  }
+}
+
+export function shortenString(str: string) {
+  return str.substring(0, 6) + "..." + str.substring(str.length - 4);
+}

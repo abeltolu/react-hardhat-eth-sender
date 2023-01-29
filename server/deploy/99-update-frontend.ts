@@ -24,7 +24,6 @@ async function updateContractAddresses(deployer: string) {
   } else {
     contractAddresses[chainId.toString()] = [contract.address];
   }
-  console.log("Contract address is ===", contract.address);
   fs.writeFileSync(frontEndContractsFile, JSON.stringify(contractAddresses));
 }
 

@@ -1,10 +1,8 @@
 import "@/styles/globals.css";
-import { DAppProvider } from "@usedapp/core";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { MoralisProvider } from "react-moralis";
 import { Share_Tech } from "@next/font/google";
-import { dappConfig } from "../utils/dapp";
 
 const shareTech = Share_Tech({ subsets: ["latin"], weight: "400" });
 
@@ -19,11 +17,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="author" content="@abeltolu" />
       </Head>
       <MoralisProvider initializeOnMount={false}>
-        <DAppProvider config={dappConfig}>
-          <main className={shareTech.className}>
-            <Component {...pageProps} />
-          </main>
-        </DAppProvider>
+        <main className={shareTech.className}>
+          <Component {...pageProps} />
+        </main>
       </MoralisProvider>
     </>
   );

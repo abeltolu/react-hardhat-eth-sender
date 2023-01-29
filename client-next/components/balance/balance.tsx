@@ -1,25 +1,18 @@
-import { useEffect, useState } from "react";
-import { useEthers, useEtherBalance, shortenAddress } from "@usedapp/core";
-import { formatEther } from "@ethersproject/units";
+import { useState } from "react";
 import * as ethers from "ethers";
 import { SendEthButton, DarkButton } from "../buttons";
 import { SendEthForm, IFormValues } from "./sendEth";
-import { useSendEthContract } from "../../hooks/useSendEth";
+import { useConnect } from "@/hooks/useConnect";
+import { shortenAddress } from "@/utils/dapp";
 export const Balance = () => {
   const [showForm, setShowForm] = useState(false);
-  const { account, activateBrowserWallet } = useEthers();
-  const { send, state, events } = useSendEthContract();
-  const balance = useEtherBalance(account);
-  const etherBalance = balance ? ethers.utils.formatUnits(balance) : 0;
+  const { account, handleConnect, walletBalance } = useConnect();
+  const etherBalance = walletBalance ? ethers.utils.formatUnits(walletBalance) : 0;
   const toggleShowForm = () => {
     setShowForm((prev) => !prev);
   };
 
-  async function loader() {
-    await send()
-      .then((result) => console.log({ result }))
-      .catch((error) => console.error({ error }));
-  }
+  async function loader() {}
   const handleFormSubmit = (values: IFormValues) => {
     //let's perform some validation
     try {
@@ -31,14 +24,11 @@ export const Balance = () => {
       alert(error?.["message"]);
     }
   };
-  useEffect(() => {
-    console.log({ state, events });
-  }, [state, events]);
   return (
     <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-8 rounded-lg space-y-4">
       {!account ? (
         <div className="text-center">
-          <DarkButton onClick={activateBrowserWallet}>Connect Wallet</DarkButton>
+          <DarkButton onClick={handleConnect}>Connect Wallet</DarkButton>
         </div>
       ) : (
         <>
