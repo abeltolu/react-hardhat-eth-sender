@@ -20,7 +20,7 @@ export const SendEthForm = ({ onCancel, onSubmit }: IProps) => {
   };
   const handleSubmit = () => {
     onSubmit(formValues);
-    setFormValues(initialState);
+    //setFormValues(initialState);
   };
   return (
     <div className=" bg-white p-4 rounded-lg space-y-3">

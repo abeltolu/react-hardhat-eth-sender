@@ -19,7 +19,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     waitConfirmations: developmentChains.includes(network.name) ? 1 : 6,
   });
   log("Deployed SendEth...");
-  log("Contract address is === ", sendEthContract.address);
+  log("Main Contract address is === ", sendEthContract.address);
 
   if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
     await verifyContract(sendEthContract.address, []);

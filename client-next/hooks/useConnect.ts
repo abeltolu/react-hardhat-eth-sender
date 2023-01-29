@@ -1,4 +1,4 @@
-import { utils } from "ethers";
+import { ethers, utils } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useMoralis } from "react-moralis";
 import contractAddresses from "../contract/addresses.json";
