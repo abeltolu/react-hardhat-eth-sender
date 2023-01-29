@@ -1,4 +1,4 @@
-import { ReactComponent as SendIcon } from "../assets/ethereum.svg";
+import SendIcon from "../assets/ethereum.svg";
 
 type ButtonProps = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 export const DarkButton = (props: ButtonProps) => {

@@ -9,6 +9,6 @@ export const dappConfig: Config = {
       alchemy: "RNd2mT9NJVIEK2yHxJRwbdar8KuqTna9",
     }),
     [Localhost.chainId]: "http://127.0.0.1:7545",
-    //[HardhatNodeChainId]: "http://127.0.0.1:8545", //hardhat node
+    [HardhatNodeChainId]: "http://127.0.0.1:8545", //hardhat node
   },
 };

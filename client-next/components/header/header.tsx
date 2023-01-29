@@ -1,6 +1,6 @@
 import { useEthers, shortenIfAddress } from "@usedapp/core";
 import Blockies from "react-blockies";
-import { ReactComponent as Logo } from "../../assets/metamask.svg";
+import Logo from "../../assets/metamask.svg";
 
 export const Header = () => {
   const { activateBrowserWallet, deactivate, account } = useEthers();

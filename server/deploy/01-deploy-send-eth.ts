@@ -5,22 +5,24 @@ import { verifyContract } from "../utils/verify";
 import { network } from "hardhat";
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
-  const { deployments, getNamedAccounts } = hre;
+  const { deployments, getNamedAccounts, getChainId } = hre;
   const { deploy, log } = deployments;
   const { deployer } = await getNamedAccounts();
-
+  const chainId = await getChainId();
+  log("ChainID is === ", chainId);
   log("Deploying SendEth...");
 
-  const nftMarketplace = await deploy("SendEth", {
+  const sendEthContract = await deploy("SendEth", {
     from: deployer,
     args: [],
     log: true,
     waitConfirmations: developmentChains.includes(network.name) ? 1 : 6,
   });
   log("Deployed SendEth...");
+  log("Contract address is === ", sendEthContract.address);
 
   if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
-    await verifyContract(nftMarketplace.address, []);
+    await verifyContract(sendEthContract.address, []);
     log("Verified on Etherscan!");
   }
 };

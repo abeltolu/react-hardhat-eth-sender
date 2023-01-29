@@ -1,11 +1,11 @@
-import { useEthers, useEtherBalance } from "@usedapp/core";
-import { Balance } from "./components/balance/balance";
-import { Header } from "./components/header/header";
-import { Loader } from "./components/loader";
-import { Transactions } from "./components/transactions/transactions";
-import { dappConfig } from "./utils/dapp";
+import { Loader } from '@/components/loader'
+import { Header } from '@/components/header/header'
+import { Balance } from '@/components/balance/balance'
+import { Transactions } from '@/components/transactions/transactions'
+import { dappConfig } from '@/utils/dapp'
+import { useEthers } from '@usedapp/core'
 
-function App() {
+export default function Home() {
   const { chainId, isLoading } = useEthers();
   const unacceptedChain = !dappConfig?.readOnlyUrls?.[chainId!];
   return (
@@ -35,5 +35,3 @@ function App() {
     </>
   );
 }
-
-export default App;
