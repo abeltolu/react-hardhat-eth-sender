@@ -2,13 +2,10 @@ import { useState } from "react";
 import * as ethers from "ethers";
 import { SendEthButton, DarkButton } from "../buttons";
 import { SendEthForm, IFormValues } from "./sendEth";
-import { useConnect } from "@/hooks/useConnect";
-import { useSendEth, useTransactions } from "@/hooks/useSendEth";
+import { useSendEthContext } from "@/hooks/useContext";
 export const Balance = () => {
   const [showForm, setShowForm] = useState(false);
-  const { account, handleConnect, walletBalance, getBalance } = useConnect();
-  const { getMyTransactions } = useTransactions();
-  const { sendETH } = useSendEth();
+  const { account, handleConnect, walletBalance, getBalance, sendETH, getMyTransactions } = useSendEthContext();
   const etherBalance = walletBalance ? ethers.utils.formatUnits(walletBalance) : 0;
   const toggleShowForm = () => {
     setShowForm((prev) => !prev);

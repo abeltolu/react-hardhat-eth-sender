@@ -2,11 +2,12 @@ import { Loader } from "@/components/loader";
 import { Header } from "@/components/header/header";
 import { Balance } from "@/components/balance/balance";
 import { Transactions } from "@/components/transactions/transactions";
-import { useConnect } from "@/hooks/useConnect";
+import { useSendEthContext } from "@/hooks/useContext";
+import { useMoralis } from "react-moralis";
 
 export default function Home() {
-  const { contractAddress, isWeb3Enabled, isWeb3EnableLoading: isLoading } = useConnect();
-
+  const { isWeb3Enabled, isWeb3EnableLoading: isLoading } = useMoralis();
+  const { contractAddress } = useSendEthContext();
   const unacceptedChain = isWeb3Enabled && !contractAddress;
   return (
     <>

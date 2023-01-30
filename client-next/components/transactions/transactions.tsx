@@ -1,11 +1,9 @@
-import { useConnect } from "@/hooks/useConnect";
-import { useTransactions } from "@/hooks/useSendEth";
+import { useSendEthContext } from "@/hooks/useContext";
 import { utils } from "ethers";
 import { TransactionOverview } from "./overview";
 
 export const Transactions = () => {
-  const { account } = useConnect();
-  const { loading, transactions } = useTransactions();
+  const { account, loadingTrxns, transactions } = useSendEthContext();
   if (!account) return null;
   return (
     <div className="w-full space-y-4">
@@ -14,7 +12,7 @@ export const Transactions = () => {
         <div className=" font-bold text-lg">Recent Transactions</div>
         <div className=" text-xs text-purple-500">See all transactions</div>
       </div>
-      {loading ? (
+      {loadingTrxns ? (
         <div className="flex items-center justify-center h-full space-x-4">
           <div className=" w-2 h-2 animate-ping bg-red-500"></div>
           <div className=" w-2 h-2 animate-ping bg-red-500"></div>

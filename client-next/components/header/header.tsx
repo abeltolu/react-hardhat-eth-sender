@@ -1,10 +1,10 @@
-import { useConnect } from "@/hooks/useConnect";
+import { useSendEthContext } from "@/hooks/useContext";
 import { shortenAddress } from "@/utils/dapp";
 import Blockies from "react-blockies";
 import Logo from "../../assets/metamask.svg";
 
 export const Header = () => {
-  const { account, handleConnect, handleDisconnect } = useConnect();
+  const { account, handleConnect, handleDisconnect } = useSendEthContext();
   return (
     <header className="flex justify-between items-center">
       <div className="">
