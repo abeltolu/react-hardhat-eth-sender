@@ -3,11 +3,12 @@ import * as ethers from "ethers";
 import { SendEthButton, DarkButton } from "../buttons";
 import { SendEthForm, IFormValues } from "./sendEth";
 import { useConnect } from "@/hooks/useConnect";
-import { useSendEthContract } from "@/hooks/useSendEth";
+import { useSendEth, useTransactions } from "@/hooks/useSendEth";
 export const Balance = () => {
   const [showForm, setShowForm] = useState(false);
   const { account, handleConnect, walletBalance, getBalance } = useConnect();
-  const { sendETH } = useSendEthContract();
+  const { getMyTransactions } = useTransactions();
+  const { sendETH } = useSendEth();
   const etherBalance = walletBalance ? ethers.utils.formatUnits(walletBalance) : 0;
   const toggleShowForm = () => {
     setShowForm((prev) => !prev);
@@ -26,6 +27,7 @@ export const Balance = () => {
         },
         onSuccess: (trx) => {
           getBalance();
+          getMyTransactions();
           alert(`Transaction successful with hash: ${trx?.hash}`);
         },
         onError: (error) => {

@@ -1,8 +1,11 @@
 import { useConnect } from "@/hooks/useConnect";
+import { useTransactions } from "@/hooks/useSendEth";
+import { utils } from "ethers";
 import { TransactionOverview } from "./overview";
 
 export const Transactions = () => {
   const { account } = useConnect();
+  const { loading, transactions } = useTransactions();
   if (!account) return null;
   return (
     <div className="w-full space-y-4">
@@ -11,20 +14,28 @@ export const Transactions = () => {
         <div className=" font-bold text-lg">Recent Transactions</div>
         <div className=" text-xs text-purple-500">See all transactions</div>
       </div>
-      {/** Transactions list */}
-      <div className=" flex flex-col space-y-3">
-        {Array(30)
-          .fill("*")
-          .map((_, index) => (
-            <TransactionOverview
-              key={index}
-              amount="$2500"
-              message="Transfer to bank"
-              receiver="Bank of asia"
-              timestamp="12/12/2023 17:12PM"
-            />
-          ))}
-      </div>
+      {loading ? (
+        <div className="flex items-center justify-center h-full space-x-4">
+          <div className=" w-2 h-2 animate-ping bg-red-500"></div>
+          <div className=" w-2 h-2 animate-ping bg-red-500"></div>
+          <div className=" w-2 h-2 animate-ping bg-red-500"></div>
+        </div>
+      ) : (
+        <div className=" flex flex-col space-y-3">
+          {transactions
+            ? transactions.map((trx, index) => (
+                <TransactionOverview
+                  key={index}
+                  amount={`${utils.formatEther(trx.amount)} ETH`}
+                  message={trx.message}
+                  receiver={trx.receiver}
+                  timestamp={new Date(trx.datetime.toNumber() * 1000).toLocaleString()}
+                  isCredit={account.toUpperCase() === trx.receiver.toUpperCase()}
+                />
+              ))
+            : null}
+        </div>
+      )}
     </div>
   );
 };

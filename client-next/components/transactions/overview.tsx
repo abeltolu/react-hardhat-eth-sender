@@ -5,8 +5,9 @@ interface IProps {
   message: string;
   amount: string;
   timestamp: string;
+  isCredit?: boolean;
 }
-export const TransactionOverview = ({ receiver, message, amount, timestamp }: IProps) => {
+export const TransactionOverview = ({ receiver, message, amount, timestamp, isCredit }: IProps) => {
   return (
     <div className=" flex justify-between">
       <div className=" inline-flex space-x-3 items-center">
@@ -17,7 +18,7 @@ export const TransactionOverview = ({ receiver, message, amount, timestamp }: IP
         </div>
       </div>
       <div className=" inline-flex flex-col items-end">
-        <div className="font-medium">{amount}</div>
+        <div className={`font-medium ${isCredit ? "text-green-500" : "text-red-500"}`}>{amount}</div>
         <div className=" font-thin text-xs text-gray-500">{timestamp}</div>
       </div>
     </div>
