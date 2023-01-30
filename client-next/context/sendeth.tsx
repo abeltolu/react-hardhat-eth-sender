@@ -27,6 +27,7 @@ interface IProps {
   sendingEth: boolean;
   loadingTrxns: boolean;
   transactions: ITransactionResult[];
+  formattedBalance: string;
   sendETH: (data: ISendProps) => Promise<void>;
   getBalance: () => Promise<void>;
   handleConnect: () => Promise<void>;
@@ -43,6 +44,7 @@ export const SendEthContext = createContext<IProps>({
   sendingEth: false,
   loadingTrxns: false,
   transactions: [],
+  formattedBalance: utils.formatEther("0"),
   sendETH: Noop,
   getBalance: Noop,
   handleConnect: Noop,
@@ -75,6 +77,10 @@ export const SendEthProvider = ({ children }: { children: JSX.Element }) => {
     const contract = new ethers.Contract(contractAddress, SendEthAbi, signer as unknown as ethers.Signer);
     return contract as SendEthAbiInterface;
   }, [account, isWeb3Enabled, web3, contractAddress]);
+
+  const formattedBalance = useMemo(() => {
+    return utils.formatUnits(walletBalance);
+  }, [walletBalance]);
 
   const getBalance = useCallback(async () => {
     if (!account || !web3) return;
@@ -171,6 +177,7 @@ export const SendEthProvider = ({ children }: { children: JSX.Element }) => {
         loadingTrxns,
         transactions,
         getMyTransactions,
+        formattedBalance,
       }}
     >
       {children}

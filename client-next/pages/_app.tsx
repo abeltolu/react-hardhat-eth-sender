@@ -4,6 +4,7 @@ import Head from "next/head";
 import { MoralisProvider } from "react-moralis";
 import { Share_Tech } from "@next/font/google";
 import { SendEthProvider } from "@/context/sendeth";
+import { Toaster } from "react-hot-toast";
 
 const shareTech = Share_Tech({ subsets: ["latin"], weight: "400" });
 
@@ -18,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="author" content="@abeltolu" />
       </Head>
       <MoralisProvider initializeOnMount={false}>
+        <Toaster position="top-right" />
         <SendEthProvider>
           <main className={shareTech.className}>
             <Component {...pageProps} />
