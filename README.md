@@ -27,7 +27,7 @@ npm run dev
 ## Author
 Tolulope Abel Adetula
 
-LinkedIn: https://ng.linkedin.com/in/adetulatolulopeabel
-Twitter: https://twitter.com/abeltolu
-Github: https://github.com/abeltolu
+LinkedIn: https://ng.linkedin.com/in/adetulatolulopeabel<br />
+Twitter: https://twitter.com/abeltolu<br />
+Github: https://github.com/abeltolu<br />
 Website: abeltolu.com
